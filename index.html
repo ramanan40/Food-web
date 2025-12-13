@@ -3,248 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food website</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-
-
+    <title>Madara Foods</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fbbf24">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-        <h1>Madara Foods</h1>
+    <div id="preloader">
+  <div class="loader-content">
+    <div class="spinner"></div>
+    <h2>Madara<span>Foods</span></h2>
+    <p>Preparing your experience...</p>
+  </div>
+</div>
+
+   <header>
+    <div class="header-container">
+        <h1>Madara<span>Foods</span></h1>
+        
         <nav class="navbar-container">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#dishes">Dishes</a></li>
-                <li><a href="#search">Search</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#dishes">Menu</a></li>
+            <ul id="nav-menu">
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#dishes" onclick="toggleMenu()">Menu</a></li>
+                <li><a href="tracking.html" style="color:var(--primary);">Track Order</a></li>
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#reservation" onclick="toggleMenu()">Booking</a></li>
+                <li>
+                    <button id="theme-toggle" title="Switch Theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+                <li><a href="checkout.html" class="nav-btn">Checkout</a></li>
+                
+                <a href="login.html" id="login-btn" class="nav-btn-icon" title="Login">
+                    <i class="fas fa-user"></i>
+                </a>
             </ul>
         </nav>
-        <div class="cart-icon">
-  <i class="fas fa-shopping-cart"></i>
-  <span id="cart-count">0</span>
-</div>
 
+        <div class="header-actions">
+            
+            <div id="user-profile" class="hidden" onclick="toggleProfileMenu(event)">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="nav-avatar">
+                <span id="user-name-display" class="hide-on-mobile">User</span>
+                <i class="fas fa-chevron-down" style="font-size: 0.7rem; opacity: 0.7; margin-left: 5px;"></i>
+
+                <div id="profile-menu" class="profile-dropdown">
+                    <div class="dropdown-header">
+                        <p class="greeting">Signed in as</p>
+                        <strong id="menu-user-name">User Name</strong>
+                        <small id="menu-user-email">user@email.com</small>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="profile.html" class="dropdown-item"><i class="fas fa-columns"></i> Dashboard</a>
+                    <a href="admin.html" class="dropdown-item"><i class="fas fa-tools"></i> Admin Panel</a>
+                    <a href="tracking.html" class="dropdown-item"><i class="fas fa-map-marker-alt"></i> Track Order</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" onclick="logoutUser()" class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
-    </header>
+
+    </div>
+</header>
     <section id="home">
         <div class="hero-container">
-            <div class="hero-content">
-                <h2>Welcome to Tasty Loop</h2>
-                <p>Your one-stop destination for delicious food.</p>
-               <a href="#dishes"> <button class="order-button">Order Now</button></a>
-                <button class="menu-button">Menu</button>
+            <div class="hero-text" data-aos="fade-right">
+                <h4><i class="fas fa-crown" style="color:var(--primary);"></i> Premium Taste</h4>
+                <h1>Experience the <br> <span class="typewriter-text"></span></h1>
+                <p>Taste the passion in every bite. Fresh ingredients, masterful recipes, and delivery faster than you can set the table.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#dishes" style="text-decoration: none;"><button class="order-button">Order Now <i class="fas fa-arrow-right"></i></button></a>
+                    <a href="#about" style="text-decoration: none;"><button class="menu-button">Our Story</button></a>
+                </div>
             </div>
-            <!-- <div class="hero-image">
-                <img src="assets/pexels-xmtnguyen-699953.jpg" alt="" srcset="" width="300px">
-            </div> -->
-       
-        </section>
-    <section id="dishes">
-      <h2 class="section-title">Our Dishes</h2>
-      <div class="dishes">
-        <div class="dish dish1">
-          <img src="assets/pexels-fotios-photos-1279330.jpg" alt="Grilled Salmon">
-          <h3>Grilled Salmon</h3>
-          <p>Served with lemon butter sauce</p>
-          <span class="price">$18.99</span>
-        <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
 
-        </div>
-        <div class="dish dish1">
-          <img src="assets/pexels-chevanon-323682.jpg" alt="Cheese Pizza">
-          <h3>Cheese Pizza</h3>
-          <p>Classic Italian with fresh mozzarella</p>
-          <span class="price">$12.50</span>
-           <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
-        </div>
-        <div class="dish dish1">
-          <img src="assets/pexels-nadin-sh-78971847-20844835.jpg" alt="Caesar Salad">
-          <h3>Caesar Salad</h3>
-          <p>Crisp romaine lettuce with Caesar dressing</p>
-          <span class="price">$10.99</span>
-        <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
-        </div>
-        <div class="dish dish1">
-          <img src="assets/pexels-xmtnguyen-699953.jpg" alt="Caesar Salad">
-          <h3>Caesar Salad</h3>
-          <p>Crisp romaine lettuce with Caesar dressing</p>
-          <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
-        </div>
-        <div class="dish dish1">
-          <img src="assets/pexels-heftiba-940302.jpg" alt="Caesar Salad">
-          <h3>Caesar Salad</h3>
-          <p>Crisp romaine lettuce with Caesar dressing</p>
-          <span class="price">$10.99</span>
-           <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
-        </div>
-        <div class="dish dish1">
-          <img src="assets/ramen.jpg" alt="Caesar Salad">
-          <h3>Ramen</h3>
-          <p>Ramen is a delicious and one of mu fav food.</p>
-          <span class="price">$10.99</span>
-      <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
+       <div class="hero-image-box" data-aos="zoom-in" data-aos-delay="200">
+  
+<div class="hero-image-box" data-aos="zoom-in" data-aos-delay="200">
+  
+  <div class="hero-img-wrapper">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Hero Food">
+    
+    <div class="float-card rating-card">
+      <div class="icon-box"><i class="fas fa-star"></i></div>
+      <div>
+        <span>Top Rated</span>
+        <strong>4.9 Stars</strong>
       </div>
-        <div class="dish dish1">
-          <img src="assets/ramen.jpg" alt="Caesar Salad">
-          <h3>Ramen</h3>
-          <p>Ramen is a delicious and one of mu fav food.</p>
-          <span class="price">$10.99</span>
-      <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
-      </div>
-        <div class="dish dish1">
-          <img src="assets/ramen.jpg" alt="Caesar Salad">
-          <h3>Ramen</h3>
-          <p>Ramen is a delicious and one of mu fav food.</p>
-          <span class="price">$10.99</span>
-      <a href="#order" class="order-btn add-to-cart" 
-   data-name="Grilled Salmon" 
-   data-price="18.99">Add to Cart</a>
-      </div>
+    </div>
 
+    <div class="float-card calories-card">
+      <div class="icon-box fire"><i class="fas fa-fire"></i></div>
+      <div>
+        <span>Energy</span>
+        <strong>450 Kcal</strong>
+      </div>
+    </div>
+
+    <div class="float-card time-card">
+      <div class="icon-box time"><i class="fas fa-clock"></i></div>
+      <div>
+        <span>Delivery</span>
+        <strong>20 Min</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div> 
+  </div>
     </section>
 
-
-
-<section id="testimonials">
-    <h2 class="testimonial-section-title">Testimonials</h2>
-    <p class="testimonial-section-title">What our customers say</p>
-    <div class="testimonial-container">
-        <div class="test">
-        <div class="testimonial">
-            <img src="assets/face1.jpg" alt="" srcset="">
-            <p>"the food was amazing and the service was excellent." - Hema </p>
+    <section id="search">
+        <div class="search-container" data-aos="fade-up">
+            <input type="text" id="dishSearch" placeholder="Search for 'Pizza', 'Burger', 'Pasta'...">
+            <button id="voiceSearchBtn" title="Use Voice Search">
+                <i class="fas fa-microphone"></i>
+            </button>
         </div>
-        <br>
-    <div class="testimonial">
-        <img src="assets/face2.jpg" alt="" srcset="">
-        <p>"Best dining experience I've ever had." - Malini</p>
+    </section>
+
+    <section id="dishes">
+        <h2 class="section-title">Our Menu</h2>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterDishes('all')"><i class="fas fa-utensils"></i> All</button>
+            <button class="filter-btn" onclick="filterDishes('pizza')"><i class="fas fa-pizza-slice"></i> Pizza</button>
+            <button class="filter-btn" onclick="filterDishes('burger')"><i class="fas fa-hamburger"></i> Burger</button>
+            <button class="filter-btn" onclick="filterDishes('asian')"><i class="fas fa-bowl-food"></i> Asian</button>
+            <button class="filter-btn" onclick="filterDishes('dessert')"><i class="fas fa-ice-cream"></i> Dessert</button>
+        </div>
+
+        <div class="dishes-grid" id="dishesContainer">
+            </div>
+    </section>
+
+ <section id="about">
+    <div class="about-wrapper">
+        
+        <div class="about-text" data-aos="fade-right">
+            <h2 class="section-title" style="text-align: left; padding-top: 0; margin-bottom: 20px;">
+                Crafting <span style="color:var(--primary);">Culinary Magic</span> Since 2015
+            </h2>
+            <p class="about-description" style="text-align: left; margin: 0 0 20px 0;">
+                At Madara Foods, we believe that food is an emotion. What started as a small kitchen experiment has grown into a premium dining experience loved by thousands.
+            </p>
+            <p class="about-description" style="text-align: left; margin: 0;">
+                We don't just cook; we curate flavors using the finest organic ingredients sourced directly from local farmers. Our mission is simple: <strong>Luxury taste, delivered at lightning speed.</strong>
+            </p>
+            
+            <div class="about-stats">
+                <div class="stat-box">
+                    <h3>50k+</h3>
+                    <p>Orders Delivered</p>
+                </div>
+                <div class="stat-box">
+                    <h3>4.9</h3>
+                    <p>User Rating</p>
+                </div>
+                <div class="stat-box">
+                    <h3>25+</h3>
+                    <p>Master Chefs</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-features" data-aos="fade-left">
+            <div class="feature-card">
+                <i class="fas fa-leaf"></i>
+                <h4>100% Fresh</h4>
+                <p>Organic ingredients only.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shipping-fast"></i>
+                <h4>Fast Delivery</h4>
+                <p>Hot food in 20 mins.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-medal"></i>
+                <h4>Top Chefs</h4>
+                <p>Curated by masters.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h4>24/7 Support</h4>
+                <p>We are here for you.</p>
+            </div>
+        </div>
+
     </div>
-    <br>
-    <div class="testimonial">
-        <img src="assets/face3.jpg" alt="" srcset="">
-        <p>"The ambiance was perfect." - John</p>
+</section>
+
+    <section id="testimonials">
+        <h2 class="section-title" data-aos="fade-up">What People Say</h2>
+        <p style="text-align: center; margin-bottom: 50px;" data-aos="fade-up">Real flavor, real stories.</p>
+        
+        <div class="testimonial-container">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="reviewer-header">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah J.">
+                    <div class="reviewer-info">
+                        <h3>Sarah Jenkins</h3>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p>"The Truffle Pasta is absolutely to die for! The delivery was super fast and the packaging kept everything warm. Highly recommended!"</p>
+                <i class="fas fa-quote-right quote-icon"></i>
+            </div>
+
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="reviewer-header">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael R.">
+                    <div class="reviewer-info">
+                        <h3>Michael Ross</h3>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    </div>
+                </div>
+                <p>"Madara Foods never disappoints. The Golden Burger was juicy and the gold dust adds such a premium touch. Will order again!"</p>
+                <i class="fas fa-quote-right quote-icon"></i>
+            </div>
+
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="reviewer-header">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily C.">
+                    <div class="reviewer-info">
+                        <h3>Emily Clark</h3>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p>"The best Sushi Platter I've had in the city. Fresh ingredients and beautiful presentation. 5 stars for the service!"</p>
+                <i class="fas fa-quote-right quote-icon"></i>
+            </div>
+        </div>
+    </section>
+
+   <section id="reservation">
+    <div class="reservation-wrapper">
+        
+        <div class="reservation-text" data-aos="fade-right">
+            <h4 class="sub-title">Save Your Spot</h4>
+            <h2 class="section-title" style="text-align: left; padding-top: 0; margin-bottom: 20px;">
+                Book A <span style="color:var(--primary);">Private Table</span>
+            </h2>
+            <p>
+                Experience the ambiance of Madara Foods. Whether it's a romantic dinner or a family feast, we ensure your table is ready before you arrive.
+            </p>
+            
+            <div class="res-benefits">
+                <div class="benefit">
+                    <div class="benefit-icon"><i class="fas fa-wine-glass-alt"></i></div>
+                    <span>Welcome Drink</span>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon"><i class="fas fa-couch"></i></div>
+                    <span>Premium Seating</span>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon"><i class="fas fa-parking"></i></div>
+                    <span>Valet Parking</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reservation-form-box" data-aos="fade-left">
+            <form class="glass-form" id="booking-form">
+                <h3>Reserve Now</h3>
+                
+                <div class="form-row-2">
+                    <div class="input-group">
+                        <label class="static-label">Date</label>
+                        <input type="date" required id="res-date">
+                    </div>
+                    <div class="input-group">
+                        <label class="static-label">Time</label>
+                        <input type="time" required id="res-time">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="static-label">Party Size</label>
+                    <div class="select-wrapper">
+                        <select id="res-guests">
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5+">5+ Guests</option>
+                        </select>
+                        <i class="fas fa-user-friends input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="input-group floating">
+                    <input type="text" required id="res-name" placeholder=" ">
+                    <label class="floating-label">Full Name</label>
+                    <i class="fas fa-user input-icon"></i>
+                </div>
+
+                <div class="input-group floating">
+                    <input type="tel" required id="res-phone" placeholder=" ">
+                    <label class="floating-label">Phone Number</label>
+                    <i class="fas fa-phone-alt input-icon"></i>
+                </div>
+
+                <button type="button" onclick="submitReservation()" class="form-submit-btn">
+                    Confirm Booking <i class="fas fa-check"></i>
+                </button>
+            </form>
+        </div>
+
     </div>
+</section>
+<section id="mobile-app">
+    <div class="app-wrapper">
+        
+        <div class="app-image" data-aos="fade-right">
+            <img src="assets/logo3.png" alt="Mobile App">
+            <div class="circle-bg"></div>
+        </div>
+
+        <div class="app-text" data-aos="fade-left">
+            <h4 class="sub-title">Madara In Your Pocket</h4>
+            <h2 class="section-title" style="text-align: left; padding-top: 0; margin-bottom: 20px;">
+                Flavor at Your <span style="color:var(--primary);">Fingertips</span>
+            </h2>
+            <p>
+                Get 20% off your first order when you download the app. Track your food in real-time, book VIP tables instantly, and unlock secret menu items.
+            </p>
+            
+            <div class="app-buttons">
+                <button class="store-btn">
+                    <i class="fab fa-apple"></i>
+                    <div class="btn-text">
+                        <small>Download on the</small>
+                        <span>App Store</span>
+                    </div>
+                </button>
+                <button class="store-btn">
+                    <i class="fab fa-google-play"></i>
+                    <div class="btn-text">
+                        <small>GET IT ON</small>
+                        <span>Google Play</span>
+                    </div>
+                </button>
+            </div>
+
+            <div class="stats-row">
+                <div>
+                    <strong>5M+</strong>
+                    <small>Downloads</small>
+                </div>
+                <div class="divider-vertical"></div>
+                <div>
+                    <strong>4.8</strong>
+                    <small>App Store Rating</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="newsletter">
+    <div class="newsletter-overlay"></div>
+    <div class="newsletter-content" data-aos="zoom-in">
+        <div class="newsletter-icon">
+            <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <h2>Unlock <span style="color:var(--primary);">Secret Recipes</span></h2>
+        <p>Join the elite club. Get exclusive weekly discounts, secret menu items, and chef's specials delivered straight to your inbox.</p>
+        
+        <form class="newsletter-form" onsubmit="event.preventDefault(); subscribeNewsletter();">
+            <div class="news-input-group">
+                <input type="email" id="news-email" placeholder="Enter your email address" required>
+                <button type="submit">
+                    Subscribe <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+        
+        <p class="spam-text"><i class="fas fa-lock"></i> No spam. Unsubscribe anytime.</p>
+    </div>
+</section>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 class="footer-logo">Madara<span>Foods</span></h2>
+                <p>Elevating your dining experience with flavors that tell a story. Fresh ingredients, masterful recipes, and a passion for taste.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#dishes">Our Menu</a></li>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Lane, Chennai, India</p>
+                <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> reservations@madarafoods.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Madara Foods. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="food-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="close-modal-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-img">
+                    <img id="modal-img" src="" alt="Food">
+                </div>
+                <div class="modal-details">
+                    <span class="category-tag" id="modal-category">Category</span>
+                    <h2 id="modal-title">Dish Name</h2>
+                    
+                    <div id="modal-meta">
+                        </div>
+
+                    <p id="modal-desc">Description goes here.</p>
+                    
+                    <div class="modal-price-row">
+                        <span class="price-tag" id="modal-price">$0.00</span>
+                        <div class="quantity-selector">
+                            <button onclick="updateQty(-1)">-</button>
+                            <span id="modal-qty">1</span>
+                            <button onclick="updateQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <button class="add-to-cart-btn-large" onclick="confirmAddToCart()">
+                        Add to Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirm-modal" class="modal-overlay hidden">
+    <div class="modal-content mini-modal">
+        <div class="icon-box-modal warning">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h3>Logout?</h3>
+        <p id="confirm-msg">Are you sure you want to sign out?</p>
+        <div class="modal-actions">
+            <button onclick="closePopup('confirm-modal')" class="btn-secondary">Cancel</button>
+            <button onclick="confirmAction()" class="btn-danger">Logout</button>
+        </div>
     </div>
 </div>
-</section>
-<section id="search">
-  <h2 class="search-title">Find Your Favorite Dish</h2>
-  <p class="search-description">Type the dish name and see the magic!</p>
-
-  <div class="search-container">
-    <input type="text" id="dishSearch" placeholder="Search for a dish...">
-    <button id="voiceSearchBtn" title="Speak" >
-  🎤 
-</button>
-
-    <!-- <i class="fas fa-search search-icon"></i> -->
-  </div>
-
-  <div id="dishCard" class="hidden dish-card">
-    <img id="dishImage" src="" alt="Dish Image">
-    <h3 id="dishName"></h3>
-    <p id="dishPrice"></p>
-  </div>
-</section>
-<!-- about section -->
-<section id="about">
-  <h2 class="about-title">About Us</h2>
-  <div class="about-container">
-    <p class="about-description">"We are a team of food enthusiasts dedicated to bringing you the best dining experience. Our passion for food drives us to constantly innovate and improve our menu. In our quest for culinary excellence, we source the finest ingredients and create dishes that delight the senses."</p>
-  </div>
-</section>
-
-<section id="contact">
-    <h2 class="contact-title">Contact Us</h2>
-    <p class="contact-description">If you have any questions or feedback, feel free to reach out!</p>
-    <div class="contact-container">
-        <input type="text" name="" id="" placeholder="Your Name"><br><br>
-        <input type="email" name="" id="" placeholder="Your Email"><br><br>
-        <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-        <br><br>
-        <button>Send Message</button>
-    </div>
-</section>
-
-<div id="cart-popup" class="cart-popup hidden">
-  <h3>Your Cart</h3>
-  <ul id="cart-items"></ul>
-  <p><strong>Total:</strong> ₹<span id="cart-total">0.00</span></p>
-  <button id="checkout-btn">Checkout</button>
-</div>
-
-
-<footer class="footer">
-  <div class="footer-container">
     
-    <!-- Brand / About -->
-    <div class="footer-section about">
-      <h2 class="footer-logo">Madara<span>Foods</span></h2>
-      <p>Serving delicious dishes made with love and fresh ingredients. Experience taste like never before!</p>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="footer-section links">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#dishes">Dishes</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- Contact Info -->
-    <div class="footer-section contact">
-      <h3>Contact Us</h3>
-      <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Chennai, India</p>
-      <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-      <p><i class="fas fa-envelope"></i> info@madarafoods.com</p>
-    </div>
-
-    <!-- Social Media -->
-    <div class="footer-section social">
-      <h3>Follow Us</h3>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2025 MadaraFoods | Developed by Ramanan</p>
-  </div>
-</footer>
-
-<!-- Font Awesome CDN -->
-<!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
-
-<script src="search.js"></script>
 
 
+    <button id="scrollToTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
+    
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="search.js"></script>
 </body>
 </html>

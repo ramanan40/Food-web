@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Madara</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="mnc-payment-body">
+
+    <div class="checkout-modal">
+
+        <div class="checkout-visuals">
+            <div class="brand-top">
+                <i class="fas fa-shield-alt"></i> Secure Payment
+            </div>
+
+            <div class="card-perspective">
+                <div class="card-3d-wrapper" id="card-3d">
+
+                    <div class="card-face card-front">
+                        <div class="card-texture"></div>
+                        <div class="card-top-row">
+                            <div class="chip"></div>
+                            <span class="card-type">VISA</span>
+                        </div>
+                        <div class="card-number" id="disp-num">#### #### #### ####</div>
+                        <div class="card-bottom-row">
+                            <div class="card-holder">
+                                <label>Card Holder</label>
+                                <span id="disp-name">FULL NAME</span>
+                            </div>
+                            <div class="card-expiry">
+                                <label>Expires</label>
+                                <span id="disp-exp">MM/YY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-face card-back">
+                        <div class="magnetic-strip"></div>
+                        <div class="signature-strip">Ramanan</div>
+                        <div class="cvv-display">
+                            <span>CVV</span>
+                            <div id="disp-cvv">***</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="visual-footer">
+                <div class="total-label">Total Payment</div>
+                <h1 id="pay-amount-display">$0.00</h1>
+            </div>
+        </div>
+
+        <div class="checkout-form-container">
+            <div class="form-header">
+                <h2>Payment Details</h2>
+                <a href="checkout.html" class="close-link">&times;</a>
+            </div>
+
+            <form id="payment-form">
+
+                <div class="input-group-mnc">
+                    <label>Card Number</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="cc-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                </div>
+
+                <div class="input-group-mnc">
+                    <label>Cardholder Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="cc-name" placeholder="Name on Card" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="row-2-mnc">
+                    <div class="input-group-mnc">
+                        <label>Expiry Date</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="cc-exp" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                    </div>
+                    <div class="input-group-mnc">
+                        <label>CVV</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="cc-cvv" placeholder="123" maxlength="3" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="pay-btn-mnc">
+                    Pay Now
+                </button>
+
+                <p class="secure-text"><i class="fas fa-lock"></i> Encrypted by Madara Secure 256-bit SSL</p>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="success-modal" class="modal-overlay hidden">
+        <div class="modal-content clean-modal">
+            <div class="success-ring">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3>Payment Successful</h3>
+            <p>Your order is confirmed and being prepared.</p>
+            <button onclick="finalizeOrder()" class="btn-clean-primary">Track Order</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="search.js"></script>
+
+</body>
+
+</html>

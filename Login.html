@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Madara Foods</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#fbbf24">
+</head>
+
+<body>
+
+    <div class="auth-page-wrapper">
+
+        <div class="auth-visual">
+            <div class="overlay-gradient"></div>
+            <div class="visual-content">
+                <h1>Madara<span>Foods</span></h1>
+                <p>Taste the passion in every bite. Join the elite food club today.</p>
+
+                <div class="review-snippet">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"The best food delivery service I have ever used. Simply exquisite."</p>
+                    <small>- Sarah J., Food Critic</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-form-container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+            <div class="form-slider" id="formSlider">
+
+                <form id="page-login-form" class="auth-page-form">
+                    <h2>Welcome Back</h2>
+                    <p class="sub-text">Please enter your details to sign in.</p>
+
+                    <div class="input-group">
+                        <input type="email" id="pg-login-email" required placeholder=" ">
+                        <label class="floating-label">Email Address</label>
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="pg-login-pass" required placeholder=" ">
+                        <label class="floating-label">Password</label>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-container">Remember me
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="form-submit-btn">Sign In</button>
+
+                    <p class="switch-text">
+                        Don't have an account? <span onclick="toggleAuthMode('signup')">Sign up</span>
+                    </p>
+                </form>
+
+                <form id="page-signup-form" class="auth-page-form hidden-right">
+                    <h2>Create Account</h2>
+                    <p class="sub-text">Join us for exclusive food experiences.</p>
+
+                    <div class="input-group">
+                        <input type="text" id="pg-signup-name" required placeholder=" ">
+                        <label class="floating-label">Full Name</label>
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="pg-signup-email" required placeholder=" ">
+                        <label class="floating-label">Email Address</label>
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="pg-signup-pass" required placeholder=" ">
+                        <label class="floating-label">Password</label>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+
+
+                    <button type="submit" class="form-submit-btn">Create Account</button>
+
+                    <p class="switch-text">
+                        Already have an account? <span onclick="toggleAuthMode('login')">Sign in</span>
+                    </p>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="search.js"></script>
+
+    <script>
+        function toggleAuthMode(mode) {
+            const loginForm = document.getElementById("page-login-form");
+            const signupForm = document.getElementById("page-signup-form");
+
+            if (mode === 'signup') {
+                loginForm.classList.add("hidden-left");
+                signupForm.classList.remove("hidden-right");
+            } else {
+                loginForm.classList.remove("hidden-left");
+                signupForm.classList.add("hidden-right");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

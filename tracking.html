@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Tracking - Madara Foods</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#fbbf24">
+</head>
+
+<body>
+
+    <header class="header-container" style="position: sticky;">
+        <h1>Madara<span>Foods</span></h1>
+        <a href="index.html" class="nav-btn">Back Home</a>
+    </header>
+
+    <div class="tracking-container">
+
+        <div class="status-card" data-aos="fade-right">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2>Order Status</h2>
+                <span class="live-badge">🔴 LIVE</span>
+            </div>
+
+            <p class="order-id">Order ID: <span style="color:var(--primary);">#MAD-8829</span></p>
+
+            <div class="timeline">
+                <div class="timeline-item active" id="step-1">
+                    <div class="icon-wrap"><i class="fas fa-receipt"></i></div>
+                    <div class="text-wrap">
+                        <h4>Order Placed</h4>
+                        <small>We have received your order.</small>
+                    </div>
+                </div>
+                <div class="timeline-item" id="step-2">
+                    <div class="icon-wrap"><i class="fas fa-fire-burner"></i></div>
+                    <div class="text-wrap">
+                        <h4>Preparing</h4>
+                        <small>Chef is cooking your meal.</small>
+                    </div>
+                </div>
+                <div class="timeline-item" id="step-3">
+                    <div class="icon-wrap"><i class="fas fa-motorcycle"></i></div>
+                    <div class="text-wrap">
+                        <h4>Out for Delivery</h4>
+                        <small>Your food is on the way!</small>
+                    </div>
+                </div>
+                <div class="timeline-item" id="step-4">
+                    <div class="icon-wrap"><i class="fas fa-house-user"></i></div>
+                    <div class="text-wrap">
+                        <h4>Delivered</h4>
+                        <small>Enjoy your meal.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-card" data-aos="fade-left">
+            <div class="map-placeholder">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80"
+                    alt="Map">
+
+                <div class="map-route-line"></div>
+                <div class="map-pin home-pin"><i class="fas fa-home"></i></div>
+                <div class="map-pin restaurant-pin"><i class="fas fa-store"></i></div>
+
+                <div id="delivery-bike" class="delivery-bike">
+                    <div class="bike-tooltip">Devid is here!</div>
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+
+                <div class="map-overlay">
+                    <span><i class="fas fa-clock"></i> <span id="delivery-timer">15:00</span></span>
+                </div>
+            </div>
+
+            <div class="driver-info">
+                <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Driver">
+                <div class="driver-text">
+                    <h4>David K.</h4>
+                    <p>Your Delivery Partner • 4.9 ★</p>
+                </div>
+                <div class="driver-actions">
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i></button>
+                    <button class="msg-btn"><i class="fas fa-comment-alt"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="delivery-modal" class="modal-overlay hidden">
+        <div class="modal-content mini-modal">
+            <div class="icon-box-modal success">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <h3>Enjoy Your Meal!</h3>
+            <p>Your order has arrived safely. Enjoy your delicious meal!</p>
+            <div class="modal-actions" style="flex-direction: column; gap: 10px;">
+                <button onclick="window.location.href='index.html'" class="btn-primary-full">
+                    Rate Food & Home
+                </button>
+                <button onclick="closeDeliveryModal()" class="btn-secondary" style="width:100%;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="search.js"></script>
+
+</body>
+
+</html>
+
+<script>
+    let timerInterval;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. Start Countdown (Set to 10 seconds for testing, or 15*60 for real)
+        startTimer(10);
+
+        // 2. Simulate Initial Progress
+        setTimeout(() => updateStatus(2), 2000); // Preparing
+        setTimeout(() => {
+            updateStatus(10); // Out for Delivery
+            startBikeAnimation();
+        }, 5000);
+    });
+
+    function updateStatus(stepNum) {
+        // Reset all current
+        document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('current'));
+
+        // Mark previous as active (green check)
+        for (let i = 1; i < stepNum; i++) {
+            const step = document.getElementById(`step-${i}`);
+            if (step) step.classList.add('active');
+        }
+
+        // Mark current as pulsing
+        const current = document.getElementById(`step-${stepNum}`);
+        if (current) {
+            current.classList.add('active');
+            current.classList.add('current');
+        }
+    }
+
+    function startBikeAnimation() {
+        const bike = document.getElementById("delivery-bike");
+        if (bike) {
+            bike.style.opacity = "1";
+            bike.style.animation = "driveMap 10s linear infinite alternate";
+        }
+    }
+
+    function stopBikeAnimation() {
+        const bike = document.getElementById("delivery-bike");
+        if (bike) {
+            bike.style.animationPlayState = "paused"; // Stop moving
+            bike.style.transform = "scale(1.2)"; // Pulse to show arrival
+            bike.style.boxShadow = "0 0 30px #22c55e"; // Green Glow
+        }
+    }
+
+    // Function to handle the Countdown & Delivery Trigger
+    function startTimer(duration) {
+        let timer = duration, minutes, seconds;
+        const display = document.getElementById('delivery-timer');
+
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            if (display) display.textContent = minutes + ":" + seconds;
+
+            // --- WHEN TIMER HITS ZERO ---
+            if (--timer < 0) {
+                clearInterval(timerInterval); // Stop the clock
+                if (display) display.textContent = "Arrived";
+
+                updateStatus(4);     // Update Timeline to "Delivered"
+                stopBikeAnimation(); // Stop the Bike
+
+                // TRIGGER THE POPUP
+                const modal = document.getElementById("delivery-modal");
+                if (modal) {
+                    modal.classList.remove("hidden");
+                    setTimeout(() => modal.classList.add("show"), 10);
+                }
+
+                // Optional Sound Effect
+                // new Audio('assets/success.mp3').play(); 
+            }
+        }, 1000);
+    }
+
+    // Function to Close Modal
+    function closeDeliveryModal() {
+        const modal = document.getElementById("delivery-modal");
+        modal.classList.remove("show");
+        setTimeout(() => modal.classList.add("hidden"), 300);
+    }
+</script>
+
+</body>
+
+</html>

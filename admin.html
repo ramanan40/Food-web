@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#fbbf24">
+</head>
+
+<body class="admin-body">
+
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <h2>Madara<span>Admin</span></h2>
+
+            <a href="index.html" style="color:var(--primary); background:rgba(255,255,255,0.05); margin-bottom:20px;">
+                <i class="fas fa-arrow-left"></i> Back to Site
+            </a>
+
+            <a href="#" class="active"><i class="fas fa-utensils"></i> Menu Items</a>
+
+            <a onclick="showAnalytics()"><i class="fas fa-chart-line"></i> Analytics</a>
+
+            <a onclick="logoutUser()" style="margin-top:auto; color:#ef4444; cursor:pointer;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-header">
+                <div style="display:flex; align-items:center; gap:15px;">
+                    <div class="admin-hamburger" onclick="toggleAdminSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <h1>Manage Menu</h1>
+                </div>
+
+            </div>
+
+            <div class="add-form-card">
+                <form id="add-dish-form">
+                    <div class="form-grid-3">
+                        <input type="text" id="a-name" class="admin-input" placeholder="Dish Name" required>
+                        <input type="number" id="a-price" class="admin-input" placeholder="Price ($)" required>
+                        <input type="text" id="a-category" class="admin-input" placeholder="Category (pizza, burger)"
+                            required>
+                    </div>
+                    <div style="margin-bottom:20px;">
+                        <input type="text" id="a-image" class="admin-input" placeholder="Image URL (Unsplash link)"
+                            required>
+                    </div>
+                    <button type="submit" class="btn-gold">Add to Menu</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-dish-list">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content mini-modal">
+            <div class="icon-box-modal warning">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <h3>Logout?</h3>
+            <p id="confirm-msg">Are you sure you want to log out?</p>
+            <div class="modal-actions">
+                <button onclick="closePopup('confirm-modal')" class="btn-secondary">Cancel</button>
+                <button onclick="confirmAction()" class="btn-danger">Logout</button>
+            </div>
+        </div>
+    </div>
+    <div id="analytics-modal" class="modal-overlay hidden">
+        <div class="modal-content report-modal">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2 style="color:white; font-family:'Playfair Display'; margin:0;">Monthly Report</h2>
+                <button class="close-modal-btn" onclick="closePopup('analytics-modal')">&times;</button>
+            </div>
+
+            <div class="report-grid">
+                <div class="report-card">
+                    <small>Total Revenue</small>
+                    <h3 id="report-revenue">$0.00</h3>
+                    <span style="color:#22c55e; font-size:0.8rem;">▲ 12% vs last month</span>
+                </div>
+                <div class="report-card">
+                    <small>Total Orders</small>
+                    <h3 id="report-orders">0</h3>
+                    <span style="color:#22c55e; font-size:0.8rem;">▲ 5 New today</span>
+                </div>
+                <div class="report-card">
+                    <small>Menu Items</small>
+                    <h3 id="report-items">0</h3>
+                    <span style="color:var(--primary); font-size:0.8rem;">Active</span>
+                </div>
+            </div>
+
+            <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <p style="text-align:center; color:gray; font-size:0.8rem; margin-top:5px;">Sales Performance (Last 7 Days)
+            </p>
+
+            <button onclick="downloadReport()" class="btn-primary-full" style="margin-top:20px;">
+                <i class="fas fa-download"></i> Download Report (PDF)
+            </button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="search.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderAdminList();
+        });
+
+        document.getElementById("add-dish-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newDish = {
+                id: Date.now(),
+                name: document.getElementById("a-name").value,
+                price: parseFloat(document.getElementById("a-price").value),
+                category: document.getElementById("a-category").value,
+                image: document.getElementById("a-image").value,
+                rating: 5.0
+            };
+
+            window.dishes.push(newDish);
+            localStorage.setItem("allDishes", JSON.stringify(window.dishes));
+            renderAdminList();
+            Toastify({ text: "Dish Added!", style: { background: "#1e293b", border: "1px solid #fbbf24" } }).showToast();
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Madara Foods</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#fbbf24">
+</head>
+
+<body>
+
+    <header class="header-container" style="position: sticky;">
+        <h1>Madara<span>Foods</span></h1>
+        <a href="index.html" class="nav-btn">Home</a>
+    </header>
+
+    <div class="dashboard-container">
+
+        <aside class="dash-sidebar">
+            <div class="user-card-small">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                <div class="user-text">
+                    <h4 id="dash-name">User</h4>
+                    <span class="badge-gold">Gold Member</span>
+                </div>
+            </div>
+
+            <nav class="dash-nav">
+                <button class="dash-link active" onclick="switchDash('overview')">
+                    <i class="fas fa-chart-pie"></i> Overview
+                </button>
+                <button class="dash-link" onclick="switchDash('favorites')">
+                    <i class="fas fa-heart"></i> My Favorites
+                </button>
+                <button class="dash-link" onclick="switchDash('orders')">
+                    <i class="fas fa-receipt"></i> Order History
+                </button>
+                <button class="dash-link logout" onclick="logoutUser()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </nav>
+        </aside>
+
+        <main class="dash-content">
+
+            <div id="overview-section" class="dash-section">
+                <h2 class="dash-title">Dashboard</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon-box-stat"><i class="fas fa-shopping-bag"></i></div>
+                        <div>
+                            <h3 id="stat-orders">0</h3>
+                            <p>Total Orders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-box-stat gold"><i class="fas fa-coins"></i></div>
+                        <div>
+                            <h3 id="stat-points">0</h3>
+                            <p>Loyalty Points</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-box-stat blue"><i class="fas fa-wallet"></i></div>
+                        <div>
+                            <h3 id="stat-wallet">$0</h3>
+                            <p>Total Spent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-heading">Active Order</h3>
+                <div class="active-order-card">
+                    <div class="order-header">
+                        <span class="status-badge">In Progress</span>
+                        <span class="order-time">Est. 15 Mins</span>
+                    </div>
+
+                    <div class="order-body">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=200&q=80"
+                            alt="Food" onerror="this.src='https://placehold.co/100x100/1e293b/fbbf24?text=Food'">
+
+                        <div>
+                            <h4>Spicy Pepperoni Pizza</h4>
+                            <p>+ 2 Coke Zero</p>
+                        </div>
+                    </div>
+
+                    <a href="tracking.html" class="track-btn-full">Track Order</a>
+                </div>
+
+                <div id="favorites-section" class="dash-section hidden">
+                    <h2 class="dash-title">My Favorites</h2>
+                    <div class="favorites-grid" id="fav-container">
+                    </div>
+                </div>
+
+                <div id="orders-section" class="dash-section hidden">
+                    <h2 class="dash-title">Order History</h2>
+                    <div id="orders-list">
+                    </div>
+                </div>
+
+        </main>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="search.js"></script>
+
+</body>
+
+</html>
