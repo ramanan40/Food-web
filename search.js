@@ -4,8 +4,6 @@
 
 const defaultDishes = [
   { id: 1, name: "Truffle Pasta", price: 18.00, category: "pasta", calories: "450 kcal", time: "25 mins", rating: 4.8, image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80", desc: "Creamy truffle sauce with handmade fettuccine." },
-  // FIXED IMAGE: Spaghetti Bolognese
-  { id: 9, name: "Spaghetti Bolognese", price: 16.00, category: "pasta", calories: "500 kcal", time: "30 mins", rating: 4.5, image: "https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&w=800&q=80", desc: "Classic meat sauce with parmesan." },
   { id: 2, name: "Golden Burger", price: 14.50, category: "burger", calories: "800 kcal", time: "20 mins", rating: 4.9, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80", desc: "Juicy wagyu beef with cheddar." },
   // FIXED IMAGE: Chicken Crispy
   { id: 10, name: "Chicken Crispy", price: 12.00, category: "burger", calories: "700 kcal", time: "15 mins", rating: 4.6, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80", desc: "Fried chicken breast with spicy mayo." },
