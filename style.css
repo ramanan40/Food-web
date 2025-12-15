@@ -4492,3 +4492,160 @@ td {
     padding: 20px;
   }
 }
+/* =========================================
+   AMAZING CHECKOUT UI (Glass & Gold)
+   ========================================= */
+
+.checkout-wrapper {
+    max-width: 1200px;
+    margin: 120px auto 60px; /* Space for fixed header */
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; /* 65% - 35% Split */
+    gap: 40px;
+    align-items: start;
+}
+
+/* --- LEFT SIDE: CART LIST --- */
+.checkout-left {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+.cart-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--text-main); margin: 0; }
+.cart-header span { color: var(--text-muted); font-size: 0.9rem; }
+
+/* Table Styles */
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 15px; }
+td { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; color: white; }
+
+/* Item Details */
+.item-flex { display: flex; align-items: center; gap: 20px; }
+.item-flex img {
+    width: 80px; height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.item-details h4 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--text-main); }
+.item-details small { color: var(--primary); font-weight: 600; background: rgba(251, 191, 36, 0.1); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+
+/* --- RIGHT SIDE: SUMMARY (Glassy Sticky) --- */
+.summary-card {
+    background: rgba(30, 41, 59, 0.6); /* Glass Effect */
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--primary); /* Gold Border */
+    border-radius: 24px;
+    padding: 30px;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.summary-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 25px; color: white; }
+
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-muted); font-size: 1rem; }
+.summary-row.total { 
+    margin-top: 20px; color: var(--primary); font-size: 1.8rem; align-items: center; 
+}
+
+.divider { height: 1px; background: var(--border-color); margin: 20px 0; }
+
+/* Promo Box */
+.promo-box {
+    display: flex; margin: 25px 0;
+    border: 1px solid var(--border-color); border-radius: 12px; padding: 5px;
+    background: rgba(0,0,0,0.2);
+}
+.promo-box input {
+    flex: 1; background: transparent; border: none; padding: 10px 15px; color: white; outline: none;
+}
+.promo-box button {
+    background: var(--bg-card); color: var(--text-main); border: none; width: 40px; border-radius: 8px; cursor: pointer; transition: 0.3s;
+}
+.promo-box button:hover { background: var(--primary); color: var(--bg-dark); }
+
+/* Pulse Button */
+.checkout-btn-pulse {
+    width: 100%; padding: 18px; border: none; border-radius: 12px;
+    background: var(--primary); color: var(--bg-dark);
+    font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+    animation: pulseBtn 2s infinite;
+    transition: 0.3s;
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+}
+.checkout-btn-pulse:hover {
+    transform: translateY(-2px);
+    background: white;
+}
+
+@keyframes pulseBtn {
+    0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+}
+
+.secure-badge {
+    text-align: center; margin-top: 15px; color: var(--text-muted); font-size: 0.8rem; opacity: 0.7;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS (Magic Cards)
+   ========================================= */
+@media (max-width: 900px) {
+    .checkout-wrapper {
+        grid-template-columns: 1fr; /* Stack */
+        margin-top: 100px;
+        padding: 0 20px;
+    }
+
+    /* Transform Table to Cards */
+    thead { display: none; } /* Hide Header */
+    
+    tbody tr {
+        display: flex;
+        flex-direction: column;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border-color);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 16px;
+    }
+
+    td {
+        padding: 10px 0;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    /* Add Labels */
+    td:nth-of-type(2):before { content: "Price"; color: var(--text-muted); font-size: 0.9rem; }
+    td:nth-of-type(3):before { content: "Total"; color: var(--text-muted); font-size: 0.9rem; }
+    
+    /* Image Cell Fix */
+    td:first-child {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .item-flex img { width: 60px; height: 60px; }
+}

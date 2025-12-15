@@ -4,13 +4,15 @@
 
 const defaultDishes = [
   { id: 1, name: "Truffle Pasta", price: 18.00, category: "pasta", calories: "450 kcal", time: "25 mins", rating: 4.8, image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80", desc: "Creamy truffle sauce with handmade fettuccine." },
-  { id: 9, name: "Spaghetti Bolognese", price: 16.00, category: "pasta", calories: "500 kcal", time: "30 mins", rating: 4.5, image: "https://images.unsplash.com/photo-1622973560614-703d7693aaa7?auto=format&fit=crop&w=800&q=80", desc: "Classic meat sauce with parmesan." },
+  // FIXED IMAGE: Spaghetti Bolognese
+  { id: 9, name: "Spaghetti Bolognese", price: 16.00, category: "pasta", calories: "500 kcal", time: "30 mins", rating: 4.5, image: "https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&w=800&q=80", desc: "Classic meat sauce with parmesan." },
   { id: 2, name: "Golden Burger", price: 14.50, category: "burger", calories: "800 kcal", time: "20 mins", rating: 4.9, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80", desc: "Juicy wagyu beef with cheddar." },
-  { id: 10, name: "Chicken Crispy", price: 12.00, category: "burger", calories: "700 kcal", time: "15 mins", rating: 4.6, image: "https://images.unsplash.com/photo-1615297348041-9f5c45a9563e?auto=format&fit=crop&w=800&q=80", desc: "Fried chicken breast with spicy mayo." },
+  // FIXED IMAGE: Chicken Crispy
+  { id: 10, name: "Chicken Crispy", price: 12.00, category: "burger", calories: "700 kcal", time: "15 mins", rating: 4.6, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80", desc: "Fried chicken breast with spicy mayo." },
   { id: 3, name: "Woodfire Pizza", price: 16.99, category: "pizza", calories: "900 kcal", time: "40 mins", rating: 4.7, image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80", desc: "Napoli style with fresh basil." },
   { id: 11, name: "Pepperoni Feast", price: 18.50, "category": "pizza", calories: "1000 kcal", time: "45 mins", rating: 4.8, image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80", desc: "Double pepperoni and extra cheese." },
   { id: 4, name: "Spicy Ramen", price: 15.00, category: "asian", calories: "400 kcal", time: "35 mins", rating: 4.9, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80", desc: "Rich miso broth with soft-boiled egg." },
-  { id: 5, name: "Sushi Platter", price: 22.00, category: "asian", calories: "350 kcal", time: "50 mins", rating: 4.9, image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80", desc: "Assorted premium sashimi and rolls." },
+  { id: 5, name: "Sushi Platter", price: 22.00, "category": "asian", calories: "350 kcal", time: "50 mins", rating: 4.9, image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80", desc: "Assorted premium sashimi and rolls." },
   { id: 6, name: "Caesar Salad", price: 10.99, category: "veg", calories: "250 kcal", time: "10 mins", rating: 4.4, image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=800&q=80", desc: "Fresh romaine lettuce with croutons." },
   { id: 7, name: "Chocolate Cake", price: 9.00, category: "dessert", calories: "450 kcal", time: "20 mins", rating: 4.8, image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80", desc: "Molten lava cake served warm." },
   { id: 12, name: "Strawberry Tart", price: 8.50, category: "dessert", calories: "300 kcal", time: "20 mins", rating: 4.5, image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80", desc: "Fresh strawberries with custard." },
@@ -36,11 +38,9 @@ const dishesContainer = document.getElementById("dishesContainer");
 // 2. INITIALIZATION
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Preloader
   const preloader = document.getElementById("preloader");
   if(preloader) setTimeout(() => preloader.classList.add("hide-loader"), 800);
 
-  // Init Libraries
   if (typeof AOS !== 'undefined') AOS.init({ duration: 800, offset: 100, once: true });
   if (typeof Typed !== 'undefined') {
     new Typed('.typewriter-text', {
@@ -49,29 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Load Grid (Home Page)
+  // Load Grid (Limit to 6)
   if (dishesContainer) {
       renderSkeletons();
       setTimeout(() => { renderDishes(window.dishes.slice(0, 6)); }, 800);
   }
 
-  // Load Page Specific Logics
   if (document.getElementById("checkout-items")) loadCheckoutItems();
   if (document.getElementById("admin-dish-list")) renderAdminList();
   if (document.getElementById("pay-amount-display")) loadPaymentPage();
   if (document.getElementById("dash-name")) loadDashboard();
   if (document.getElementById("delivery-timer")) initTrackingPage();
 
-  // Common Logic
   checkLoginState();
   updateCartCount();
   initTheme();
   
-  // Search & Filter (If elements exist)
   if(document.getElementById("dishSearch")) setupSearchListener();
 });
 
-// Toast Helper
 function showToast(message, type="success") {
   if (typeof Toastify !== 'undefined') {
     Toastify({
@@ -97,7 +93,6 @@ function renderDishes(data) {
     if (!dishesContainer) return;
     dishesContainer.innerHTML = "";
 
-    // Center grid if few items
     if (data.length > 0 && data.length < 3) {
         dishesContainer.classList.add('centered');
     } else {
@@ -190,7 +185,6 @@ function checkLoginState() {
     const loginBtn = document.getElementById("login-btn");
     const userProfile = document.getElementById("user-profile");
     
-    // IDs must match HTML
     const navName = document.getElementById("user-name-display");
     const menuName = document.getElementById("menu-user-name");
     const menuEmail = document.getElementById("menu-user-email");
@@ -310,14 +304,22 @@ window.removeFavFromDash = function(id) {
     showToast("Removed from favorites");
 };
 
-// Login/Signup Listeners
+// ==========================================
+// FIX: LOGIN NAME LOGIC
+// ==========================================
 const pgLoginForm = document.getElementById("page-login-form");
 if (pgLoginForm) {
     pgLoginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const email = document.getElementById("pg-login-email").value;
-        const user = { name: email.split('@')[0], email: email };
+        
+        // CAPITALIZE NAME
+        const rawName = email.split('@')[0];
+        const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+        
+        const user = { name: formattedName, email: email };
         localStorage.setItem("currentUser", JSON.stringify(user));
+        
         showToast(`Welcome back, ${user.name}`);
         setTimeout(() => { window.location.href = "index.html"; }, 1500);
     });
@@ -425,7 +427,7 @@ window.goToPaymentPage = function() {
 };
 
 // ==========================================
-// 6. PAYMENT PAGE LOGIC (Integrated)
+// 6. PAYMENT PAGE LOGIC
 // ==========================================
 
 function loadPaymentPage() {
@@ -441,7 +443,6 @@ function loadPaymentPage() {
             e.preventDefault();
             const btn = payForm.querySelector("button");
             
-            // Loading State
             btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
             btn.style.opacity = "0.7";
             btn.disabled = true;
@@ -541,7 +542,6 @@ function renderAdminList() {
     });
 }
 
-// Chart Logic
 function renderAdminChart() {
     const ctx = document.getElementById("revenueChart");
     if (!ctx) return;
@@ -580,7 +580,6 @@ function renderAdminChart() {
     });
 }
 
-// Analytics Popup
 window.showAnalytics = function () {
   const totalItems = window.dishes.length;
   const orders = JSON.parse(localStorage.getItem("orderHistory")) || [];
@@ -648,13 +647,28 @@ window.updateQty = function(n) {
     if(currentQty + n >= 1) { currentQty += n; document.getElementById("modal-qty").innerText = currentQty; }
 };
 
+// FIX: TOGGLE FAVORITE WITHOUT RELOADING
 window.toggleFavorite = function(event, id) {
     event.stopPropagation(); 
     const index = favorites.indexOf(id);
-    if (index === -1) { favorites.push(id); showToast("Saved!"); }
-    else { favorites.splice(index, 1); showToast("Removed."); }
+    const btn = event.currentTarget;
+    const icon = btn.querySelector("i");
+
+    if (index === -1) { 
+        favorites.push(id); 
+        icon.classList.remove("far");
+        icon.classList.add("fas");
+        btn.classList.add("active");
+        showToast("Saved!"); 
+    } else { 
+        favorites.splice(index, 1); 
+        icon.classList.remove("fas");
+        icon.classList.add("far");
+        btn.classList.remove("active");
+        showToast("Removed."); 
+    }
     localStorage.setItem("favorites", JSON.stringify(favorites));
-    renderDishes(window.dishes); 
+    // Do NOT call renderDishes here to avoid resetting the grid
 };
 
 window.openPopup = function(id) {
