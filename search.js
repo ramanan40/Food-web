@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load Grid (Home Page)
   if (dishesContainer) {
       renderSkeletons();
-      setTimeout(() => { renderDishes(window.dishes.slice(0, 8)); }, 800);
+      setTimeout(() => { renderDishes(window.dishes.slice(0, 6)); }, 800);
   }
 
   // Load Page Specific Logics
@@ -159,7 +159,7 @@ function setupSearchListener() {
                 );
                 renderDishes(filtered);
             } else {
-                renderDishes(window.dishes.slice(0, 8));
+                renderDishes(window.dishes.slice(0, 6));
             }
         });
     }
@@ -174,7 +174,7 @@ window.filterDishes = function(category) {
     });
 
     if (category === "all") {
-        renderDishes(window.dishes.slice(0, 8));
+        renderDishes(window.dishes.slice(0, 6));
     } else {
         const filtered = window.dishes.filter(dish => dish.category === category);
         renderDishes(filtered);

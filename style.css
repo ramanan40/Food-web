@@ -1331,7 +1331,11 @@ td {
 /* =========================================
    9. ADMIN DASHBOARD (TOP NOTCH)
    ========================================= */
-.admin-card {
+.admin-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px 100px;
+}
 .admin-card {
   background: var(--bg-card);
   padding: 40px;
@@ -1589,6 +1593,14 @@ td {
 #scrollToTopBtn:hover {
   transform: translateY(-5px);
   background: var(--text-main);
+}
+.toastify {
+  background: var(--bg-card) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--primary) !important;
+  border-radius: 12px !important;
+  font-family: "Poppins", sans-serif !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 /* =========================================
    ABOUT SECTION (Top Notch Upgrade)
@@ -2740,16 +2752,16 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
   color: var(--text-muted);
 }
 
+/* Active Order */
 .active-order-card {
   background: linear-gradient(
     135deg,
     rgba(251, 191, 36, 0.1),
-    rgba(15, 23, 42, 0.9)
+    rgba(15, 23, 42, 0.6)
   );
   border: 1px solid var(--primary);
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 .order-header {
   display: flex;
@@ -2860,7 +2872,12 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
    ========================================= */
 
 /* Update the Profile Pill to be clickable */
-/* Update the Profile Pill to be clickable */
+#user-profile {
+  position: relative; /* Anchor for the absolute dropdown */
+  cursor: pointer;
+  padding-right: 15px; /* Space for arrow */
+  user-select: none;
+}
 
 /* The Dropdown Container */
 .profile-dropdown {
@@ -3029,6 +3046,18 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
 /* =========================================
    FIX: DASHBOARD IMAGES
    ========================================= */
+
+.active-order-card {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.1),
+    rgba(15, 23, 42, 0.9)
+  );
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
 
 .order-body {
   display: flex;
@@ -4075,6 +4104,50 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
   }
 }
 /* =========================================
+   1. PROFILE BUTTON (Glass Pill Style)
+   ========================================= */
+#user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 6px 15px 6px 6px; /* Extra right padding for name */
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 15px;
+}
+
+#user-profile:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#user-profile .nav-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  object-fit: cover;
+}
+
+#user-name-display {
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+}
+
+#user-profile i.fa-chevron-down {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+
+/* =========================================
    2. CHECKOUT RESPONSIVENESS (Card View)
    ========================================= */
 @media (max-width: 768px) {
@@ -4167,7 +4240,86 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
     border-radius: 10px;
   }
 }
+/* =========================================
+   1. HEADER LAYOUT (Profile Separate)
+   ========================================= */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  position: relative;
+}
 
+/* Group Profile and Hamburger together */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Profile Pill Style */
+#user-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 5px 12px 5px 5px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#user-profile:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  object-fit: cover;
+}
+
+#user-name-display {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: white;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none;
+  } /* Hide Name on small screens to save space */
+
+  #user-profile {
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  #user-profile:hover {
+    background: transparent;
+    transform: none;
+  }
+
+  .nav-avatar {
+    width: 40px;
+    height: 40px;
+  } /* Bigger touch target */
+
+  /* Ensure Hamburger is visible */
+  .hamburger {
+    margin-left: 10px;
+    font-size: 1.5rem;
+  }
+}
 
 /* =========================================
    2. CHECKOUT ALIGNMENT FIX (Perfect Grid)
@@ -4200,6 +4352,24 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
   border: 1px solid var(--border-color);
   position: sticky;
   top: 100px; /* Sticks on scroll */
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  color: var(--text-muted);
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+td {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: white;
+  vertical-align: middle;
 }
 
 .item-flex {
@@ -4321,5 +4491,4 @@ input[type="time"]::-webkit-calendar-picker-indicator:hover {
   .admin-content {
     padding: 20px;
   }
-}
 }
